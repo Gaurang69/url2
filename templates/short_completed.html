@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<title>New paste created!</title>
+	</head>
+	<body>
+		<script type="text/javascript">
+			function selectAll(id) {
+				document.getElementById(id).focus();
+				document.getElementById(id).select();
+			}
+		</script>
+		<form>
+			<div>
+				<input type="text" id="paste_url" value="{{server_url}}{{paste_id}}" onClick="selectAll('paste_url');">
+			</div>
+			<div>
+				<a href="{{server_url}}{{paste_id}}">{{server_url}}{{paste_id}}</a>
+			</div>
+		</form>
+	</body>
+</html>
+

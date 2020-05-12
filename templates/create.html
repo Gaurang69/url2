@@ -1,0 +1,104 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Short a link</title>
+		<script type="text/javascript">
+			var mouse = {x: 0, y: 0};
+			
+			document.onreadystatechange = function () {
+				if (document.readyState == "complete") {
+					elements = [document.getElementById("http301info"), document.getElementById("http302"), document.getElementById("metaRefresh"), document.getElementById("javascript")];
+					document.addEventListener('mousemove', function(e){ 
+						mouse.x = e.clientX || e.pageX; 
+						mouse.y = e.clientY || e.pageY;
+						elements.forEach(
+							function (item) {
+								if (item.style.display != "none") {
+									item.style.left = mouse.x + 10 + "px"
+									item.style.top = mouse.y + 15 + "px"
+								}
+							}
+						)
+					}, false);
+				}
+			}
+		</script>
+		<style type="text/css">
+			.info {
+				display: none;
+				position: absolute;
+				left: 0px;
+				top: 0px;
+				width: 200px;
+				white-space: pre-wrap;
+				border: 1px solid black;
+				padding: 4px;
+				background-color: #FEFFE2;
+			}
+			
+			#targetinput {
+				width: 50%;
+			}
+			
+			#submit {
+				display: block;
+				width: 400px;
+				margin-left: auto;
+				margin-right: auto;
+				background-color: #9B9B9B;
+				color: #fff;
+				font-size: 25px;
+				text-decoration: none;
+				cursor: pointer;
+				border:none;
+			}
+			
+			#submit:hover {
+				border: none;
+				background: #C3C3C3;
+				box-shadow: 0px 0px 1px #777;
+			}
+		</style>
+	</head>
+	<body>
+		<form action="/new" method="get">
+			URL: <input type="text" name="target" id="targetinput">
+			<br/>
+			Method:
+			<span>
+				<input type="radio" name="method" id="http301radio" value="http301" checked>
+					<label for="http301radio" onmouseover= 'document.getElementById("http301info").style.display = "block"'
+					onmouseout = 'document.getElementById("http301info").style.display = "none"'>
+						HTTP-Statuscode 301
+					</label>
+				</input>
+				<input type="radio" name="method" id="http302radio" value="http302">
+					<label for="http302radio" onmouseover= 'document.getElementById("http302").style.display = "block"'
+					onmouseout = 'document.getElementById("http302").style.display = "none"'>
+						HTTP-Statuscode 302
+					</label>
+				</input>
+				<input type="radio" name="method" id="metaRefreshradio" value="metaRefresh">
+					<label for="metaRefreshradio" onmouseover= 'document.getElementById("metaRefresh").style.display = "block"'
+					onmouseout = 'document.getElementById("metaRefresh").style.display = "none"'>
+						Meta refresh
+					</label>
+				</input>
+				<input type="radio" name="method" id="javascriptradio" value="javascript">
+					<label for="javascriptradio" onmouseover= 'document.getElementById("javascript").style.display = "block"'
+					onmouseout = 'document.getElementById("javascript").style.display = "none"'>
+						Javascript
+					</label>
+				</input>
+			<span>
+			
+			<input type="submit" value="Generate new short link" id="submit">
+		</form>
+		
+		<div class="info" id="http301info">Use the 301 Moved Permanently HTTP status code to tell the client the target of the url.</div>
+		<div class="info" id="http302">Use the 302 Found HTTP status code to tell the client the target of the url.</div>
+		<div class="info" id="metaRefresh">Deliver a HTML site with a containing html-&lt;meta&gt;-tag to redirect to the new url.</div>
+		<div class="info" id="javascript">This will use javascript so set the window.location to the desired url.</div>
+	</body>
+</html>
